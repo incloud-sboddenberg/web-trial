@@ -45,6 +45,11 @@ export const getWeathersOfCountry = (countryId) =>
     .then(data => data)
 
 
+export const getWeatherById = (id) => 
+    fetch(`${api}/weathers/${id}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
 
 /**
  * POST CALLS
