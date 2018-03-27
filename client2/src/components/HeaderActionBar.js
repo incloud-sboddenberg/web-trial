@@ -8,7 +8,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeUser } from '../actions/loggedUserActions'
 import {
-    addCountry as addCountryToStore
+    addCountry as addCountryToStore,
+    clearStore as _clearStore
 } from '../actions/countriesActions'
 
 import { 
@@ -44,6 +45,7 @@ class HeaderActionBar extends Component {
 
     handleLogoutOnClik = () => {
         this.props.logout()
+        this.props.clearCountriesStore()
         this.props.history.push("/login")
     }
 
@@ -121,7 +123,8 @@ function mapStateToProps({ loggedUser }) {
 function mapDispatchToProps (dispatch) {
     return {
         logout: () => dispatch(removeUser()),
-        addCountryToStore: (country) => dispatch(addCountryToStore(country))
+        addCountryToStore: (country) => dispatch(addCountryToStore(country)),
+        clearCountriesStore: () => dispatch(_clearStore())
     }
 }
 

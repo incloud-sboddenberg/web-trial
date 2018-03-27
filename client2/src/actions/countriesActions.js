@@ -5,6 +5,7 @@ import {
 
 export const ADD_COUNTRIES = 'ADD_COUNTRIES'
 export const ADD_COUNTRY = 'ADD_COUNTRY'
+export const CLEAR_STORE = 'CLEAR_STORE'
 
 
 
@@ -29,5 +30,12 @@ export const addCountry = (country) => {
     return {
         type: ADD_COUNTRY,
         country
+    }
+}
+
+
+export const clearStore = () => {
+    return {
+        type: CLEAR_STORE
     }
 }

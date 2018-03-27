@@ -1,6 +1,7 @@
 import {
     ADD_COUNTRIES,
-    ADD_COUNTRY
+    ADD_COUNTRY,
+    CLEAR_STORE
 } from '../actions/countriesActions'
 
 
@@ -30,6 +31,10 @@ export const countries = (state = initcountries, action) => {
                 ids: oldIds
             }
         }
+        case CLEAR_STORE:
+            return {
+                ids: []
+            }
         default:
             return state
     }
