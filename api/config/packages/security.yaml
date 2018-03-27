@@ -2,12 +2,16 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        our_db_provider:
+            entity:
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: ~
+            provider: our_db_provider
 
             # activate different ways to authenticate
 
@@ -16,3 +20,7 @@ security:
 
             # form_login: ~
             # https://symfony.com/doc/current/security/form_login_setup.html
+        
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
