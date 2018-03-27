@@ -26,6 +26,7 @@ class HeaderActionBar extends Component {
         this.toggleDialog = this.toggleDialog.bind(this)
         this.handleCityInput = this.handleCityInput.bind(this)
         this.addCountryToUser = this.addCountryToUser.bind(this)
+        this.redirectHome = this.redirectHome.bind(this)
     }
 
     state = {
@@ -38,6 +39,10 @@ class HeaderActionBar extends Component {
     handleLogoutOnClik = () => {
         this.props.logout()
         this.props.history.push("/login")
+    }
+
+    redirectHome = () => {
+        this.props.history.push("/home")
     }
 
     
@@ -72,7 +77,7 @@ class HeaderActionBar extends Component {
         if (this.props.username === undefined) return null
         return (
             HeaderActionBarTemplate(
-                this.props.username, this.handleLogoutOnClik,
+                this.props.username, this.handleLogoutOnClik, this.redirectHome,
                 this.state.isDialogOpen, this.toggleDialog,
                 this.handleCityInput, this.state.cities, this.addCountryToUser
             )

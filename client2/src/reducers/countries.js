@@ -1,5 +1,6 @@
 import {
-    ADD_COUNTRIES
+    ADD_COUNTRIES,
+    ADD_COUNTRY
 } from '../actions/countriesActions'
 
 
@@ -19,6 +20,9 @@ export const countries = (state = initcountries, action) => {
             })
             newState.ids = [...idsSet]
             return newState        
+        }
+        case ADD_COUNTRY: {
+            return state;
         }
         default:
             return state

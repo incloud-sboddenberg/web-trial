@@ -8,6 +8,7 @@ import Page404 from './Page404'
 import FeedPage from './FeedPage'
 import RootURL from './RootURL'
 import CredentialsBox from './CredentialsBox'
+import DetailsPage from './DetailsPage'
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
                 <Route exact path="/" component={RootURL} />
                 <Route exact path="/login" component={CredentialsBox} />
                 <Route exact path="/home" component={FeedPage} />
+                <Route exact path="/details/:country" component={DetailsPage} />
                 <Route component={Page404} />
             </Switch>
         </MuiThemeProvider>

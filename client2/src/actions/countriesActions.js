@@ -4,6 +4,7 @@ import {
 
 
 export const ADD_COUNTRIES = 'ADD_COUNTRIES'
+export const ADD_COUNTRY = 'ADD_COUNTRY'
 
 
 

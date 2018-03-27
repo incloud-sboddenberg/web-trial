@@ -9,15 +9,25 @@ import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import TextField from 'material-ui/TextField'
 import {List, ListItem} from 'material-ui/List'
+import FontIcon from 'material-ui/FontIcon'
+import { blue500  } from 'material-ui/styles/colors'
+
 
 
 const HeaderActionBarTemplate = (
-    username, handleLogout,
+    username, handleLogout, redirectHome,
     isDialogOpen, toggleDialog,
     handleCityInput, cities, addCountryToUser) => (
     <div>
         <Toolbar className="sticky-toolbar">
             <ToolbarGroup firstChild={true}>
+                <FontIcon
+                    className="material-icons"
+                    hoverColor={blue500} 
+                    onClick={redirectHome}
+                >
+                    home
+                </FontIcon>
                 <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4>
             </ToolbarGroup>
             <ToolbarGroup>
