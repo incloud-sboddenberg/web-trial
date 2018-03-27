@@ -113,9 +113,7 @@ class UserController extends Controller
         $entityManager->flush();
         
         return new JsonResponse([
-            "country" => $countryObj->getName(),
-            "id" => $id,
-            "name" => $user->getUsername()
+            "success" => "country has been added to user"
         ]);
     }
 

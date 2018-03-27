@@ -22,7 +22,13 @@ export const countries = (state = initcountries, action) => {
             return newState        
         }
         case ADD_COUNTRY: {
-            return state;
+            let oldIds = state.ids
+            oldIds.unshift(action.country.id)
+            return {
+                ...state,
+                [action.country.id]: action.country,
+                ids: oldIds
+            }
         }
         default:
             return state

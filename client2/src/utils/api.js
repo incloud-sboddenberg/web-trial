@@ -15,7 +15,7 @@ export const getCountry = (name) =>
     .then(res => res.json())
     .then(data => data)
 
-export const fetchCountry = (name) =>
+export const fetchCountryFromExternaAPI = (name) =>
     fetch(`${restcountries}/${name}`, { headers })
     .then(res => res.json())
     .then(data => data)
@@ -30,6 +30,14 @@ export const fetchWeatherForCountry = (country) =>
     fetch(`${weatherAPI}=${country}`, { headers })
     .then(res => res.json())
     .then(data => data)
+
+
+
+export const addCountryToUser = (id, country) =>
+    fetch(`${api}/add-country/${country}/to-user/${id}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
 
 
 /**
@@ -79,19 +87,6 @@ export const addCountry = (name) => {
 
 
 
-// TODO: Check how to add to the manytomany relation
-export const addCountryToUser = (id, country) => {
-    return fetch(`${api}/countries`, {
-        method: 'POST',
-        headers: {
-            ...headers,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ country})
-    })
-    .then(res => res.json())
-    .then(data => data)
-}
 
 
 export const addWeatherToCountry = (countryId, temp, humidity, rain, icon) => {

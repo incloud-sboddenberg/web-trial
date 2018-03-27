@@ -7,10 +7,15 @@ import HeaderActionBarTemplate from '../templates/HeaderActionBarTemplate'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeUser } from '../actions/loggedUserActions'
+import {
+    addCountry as addCountryToStore
+} from '../actions/countriesActions'
+
 import { 
     getCountry as _getCountry,
-    fetchCountry as _fetchCountry,
-    addCountry as _addCountry
+    fetchCountryFromExternaAPI as _fetchCountry,
+    addCountry as _addCountry,
+    addCountryToUser as _addCountryToUser
 } from '../utils/api'
 
 class HeaderActionBar extends Component {
@@ -27,6 +32,7 @@ class HeaderActionBar extends Component {
         this.handleCityInput = this.handleCityInput.bind(this)
         this.addCountryToUser = this.addCountryToUser.bind(this)
         this.redirectHome = this.redirectHome.bind(this)
+        this.persistCountryToServerAndStore = this.persistCountryToServerAndStore.bind(this)
     }
 
     state = {
@@ -48,11 +54,28 @@ class HeaderActionBar extends Component {
     
     addCountryToUser = (city, id) => () => {
         if (id === null) {
-            _addCountry(city).then(data => console.log(data))
+            // persist new country in server
+            _addCountry(city).then(countryData => 
+                this.persistCountryToServerAndStore(this.props.userId, city, countryData.id)
+            )
+        } else {
+            this.persistCountryToServerAndStore(this.props.userId, city, id)
         }
-
         this.toggleDialog()
     }
+
+    persistCountryToServerAndStore = (userId, city, id) => {
+            _addCountryToUser(userId, city)
+                .then(result => {
+                    if (result.success !== undefined) {
+                        this.props.addCountryToStore({ 
+                            name: city,
+                            id
+                        })
+                    }
+                })
+    }
+
 
     handleCityInput = (e) => {
         const city = e.target.value
@@ -60,6 +83,8 @@ class HeaderActionBar extends Component {
             _getCountry(city)
                 .then(data => {
                     if (data.length === 0) {
+                        // if no country was found in the server
+                        // user external API
                         _fetchCountry(city)
                             .then(data => {
                                 if (data instanceof Array && data.length > 0) {
@@ -88,13 +113,15 @@ class HeaderActionBar extends Component {
 function mapStateToProps({ loggedUser }) {
     return {
         username: loggedUser.username,
+        userId: loggedUser.id
     }
 }
 
 
 function mapDispatchToProps (dispatch) {
     return {
-        logout: () => dispatch(removeUser())
+        logout: () => dispatch(removeUser()),
+        addCountryToStore: (country) => dispatch(addCountryToStore(country))
     }
 }
 

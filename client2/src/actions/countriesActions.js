@@ -23,3 +23,11 @@ const addCountries = (countries) => {
         countries
     }
 }
+
+
+export const addCountry = (country) => {
+    return {
+        type: ADD_COUNTRY,
+        country
+    }
+}
