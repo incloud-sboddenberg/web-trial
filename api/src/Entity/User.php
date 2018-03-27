@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+
 
 /**
  * @ORM\Table(name="app_users")
@@ -54,6 +56,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $isActive;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Country", inversedBy="users")
+     * @ApiSubresource
+     */
+    public $countries;
 
 
     public function __construct()

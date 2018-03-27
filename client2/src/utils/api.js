@@ -12,6 +12,17 @@ const headers = {
  * GET CALLS
  */
 
+export const getCountry = (name) =>
+    fetch(`${api}/countries?name=${name}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+export const fetchCountry = (name) =>
+    fetch(`https://restcountries.eu/rest/v2/name/${name}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+
 export const getCategories = () =>
     fetch(`${api}/categories`, { headers })
     .then(res => res.json())
@@ -48,7 +59,6 @@ export const getCommentsOfPost = (postId) =>
  */
 
 export const signUp = (username, email, password) => {
-
     return fetch(`${api}/users`, {
         method: 'POST',
         headers: {
@@ -63,7 +73,6 @@ export const signUp = (username, email, password) => {
 
 
 export const login = (username, password) => {
-
     return fetch(`${api}/login`, {
         method: 'POST',
         headers: {
@@ -75,6 +84,22 @@ export const login = (username, password) => {
     .then(res => res.json())
     .then(data => data)
 }
+
+
+export const addCountry = (name) => {
+    return fetch(`${api}/countries`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name })
+    })
+    .then(res => res.json())
+    .then(data => data)
+}
+
+
 
 
 export const addAPost = (title, body, author, category) =>

@@ -6,10 +6,7 @@ import HeaderActionBar from './HeaderActionBar'
 
 class FeedPage extends Component {
 
-    state = {
-    }
     
-  
     componentDidMount() {
         if (this.props.userId === null) {
             this.props.history.push("/")
@@ -18,17 +15,6 @@ class FeedPage extends Component {
         }
     }
 
-
-    
-    // @direction: clicking next/prev
-    // next: 1
-    // prev: -1
-    handlePaginationButtons = (direction) => () => {
-        const curretPage = this.state.page + direction
-        this.setState((oldState) => ({ page: oldState.page + direction }))
-        this.props.history.push("?page=" + curretPage)
-    }
-    
     render() {
         if (this.props.username === null) return null
         return (
