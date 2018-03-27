@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import {List, ListItem} from 'material-ui/List'
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 import { getUsersCountries } from '../actions/countriesActions'
@@ -16,19 +17,25 @@ class FeedPage extends Component {
     }
 
     render() {
-        if (this.props.username === null) return null
+        const { username, countries } = this.props
+        if (username === null) return null
         return (
             <div>
                 <HeaderActionBar />
+
+            <List className="countries-list" >
+                {countries.ids.map((countryId) => (<ListItem key={countryId} primaryText={countries[countryId].name}  />))}
+            </List>
             </div>
         )
     }
 }
 
-function mapStateToProps ({ loggedUser }) {
+function mapStateToProps ({ loggedUser, countries }) {
     return {
         userId: loggedUser.id,
         username: loggedUser.username,
+        countries: countries
     }
 }
 
