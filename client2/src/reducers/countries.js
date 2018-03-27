@@ -1,18 +1,18 @@
-// FIXME: Maybe the path is not well set
 import {
-    ACTION_NAME
+    ADD_COUNTRIES
 } from '../actions'
 
-const initcountries = {}
+const initcountries = {
+    ids: []
+}
 
 
 export const countries = (state = initcountries, action) => {
     switch (action.type) {
-        case ACTION_NAME:
-            // operations
-            return {
-                ...state
-            }
+        case ADD_COUNTRIES: {
+           let newState = { ...state } 
+
+        }
         default:
             return state
     }

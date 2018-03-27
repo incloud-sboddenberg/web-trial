@@ -46,6 +46,7 @@ class CredentialsBox extends Component {
                 if (data.error) {
                     // TODO: add a snackbar with information
                 } else {
+                    console.log(data)
                     this.props.addUserToStore(data.id, data.username, data.email)
                     this.props.history.push("/home")
                 }
