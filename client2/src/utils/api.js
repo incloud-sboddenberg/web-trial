@@ -97,7 +97,12 @@ export const addWeatherToCountry = (countryId, temp, humidity, rain, icon) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-            country: `/countries/${countryId}`})
+            country: `/countries/${countryId}`,
+            temp,
+            humidity,
+            rain,
+            icon
+        })
     })
     .then(res => res.json())
     .then(data => data)

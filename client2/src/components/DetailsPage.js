@@ -10,6 +10,11 @@ import {
 
 class DetailsPage extends Component {
 
+    // TODO: use `http://openweathermap.org/img/w/${icon}.png`
+    // to display icons
+
+
+
     componentDidMount() {
         if (this.props.userId === null) {
             this.props.history.push("/")
@@ -22,7 +27,13 @@ class DetailsPage extends Component {
                     const { humidity, temp } = data.main
                     const icon = data.weather[0].icon
                     // FIXME: make sure that the rain field exist this way in the API
+                    // loop over data.weather.main
                     const rain = (data["rain"] !== undefined)? true: false
+
+                    _addWeatherToCountry(this.props.match.params.country, temp, humidity, rain, icon)
+                        .then(data => {
+                            console.log(data)
+                        })
                     console.group()
                     console.log(humidity)
                     console.log(icon)
