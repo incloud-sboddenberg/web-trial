@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 
 import { 
     fetchWeatherForCountry as _fetchWeatherForCountry,
-    addWeatherToCountry as _addWeatherToCountry
+    addWeatherToCountry as _addWeatherToCountry,
+    getWeathersOfCountry as _getWeathersOfCountry
 } from '../utils/api'
 
 class DetailsPage extends Component {
@@ -15,12 +16,45 @@ class DetailsPage extends Component {
 
 
 
+
+    state = {
+        humidity: 'nada',
+        temp: 'nada',
+        icon: 'nada',
+        rain: 'nada'
+    }
+
     componentDidMount() {
         if (this.props.userId === null) {
             this.props.history.push("/")
         }
+    
+        const countryId = this.props.match.params.country
 
-        if (this.props.countryName.name !== undefined) {
+        _getWeathersOfCountry(countryId).then(data => {
+                if (data instanceof Array && data.length > 0) {
+                    if (this.calculateMinutesDiff(data[0].creationDate) > 10) {
+                       this.refetchWeatherForCountry() 
+                    } else {
+                        console.log(data)
+                        this.setWeatherData(data[0].humidity, data[0].temp, data[0].icon, data[0].rain)
+                    }
+                } else {
+                       this.refetchWeatherForCountry() 
+                }
+
+        })
+    }
+
+    setWeatherData = (humidity, temp, icon, rain) => 
+        this.setState({ 
+            humidity, 
+            temp, 
+            icon: `http://openweathermap.org/img/w/${icon}.png`, 
+            rain 
+    })
+
+    refetchWeatherForCountry = () => {
             _fetchWeatherForCountry(this.props.countryName.name)
                 .then(data => {
                     console.log(data)
@@ -33,6 +67,7 @@ class DetailsPage extends Component {
                     _addWeatherToCountry(this.props.match.params.country, temp, humidity, rain, icon)
                         .then(data => {
                             console.log(data)
+                            this.setWeatherData(data.humidity, data.temp, data.icon, data.rain)
                         })
                     console.group()
                     console.log(humidity)
@@ -41,14 +76,25 @@ class DetailsPage extends Component {
                     console.log(rain)
                     console.groupEnd()
                 })
-        }
     }
 
 
-    render() {
+    calculateMinutesDiff = (date) => {
+        const rightNow = new Date()
+        const lastFetchingDate = new Date(date)
+        const timeDiff = Math.abs(rightNow.getTime() - lastFetchingDate.getTime());
+        const diffMinutes = Math.ceil(timeDiff / (1000 * 60)); 
+        return diffMinutes
+    }
 
+    
+
+
+
+    render() {
+        const { humidity, temp, rain, icon } = this.state
         return (
-            DetailsPageTemplate()
+            DetailsPageTemplate(humidity, temp, rain, icon)
         )
     }
 }

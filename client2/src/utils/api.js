@@ -39,6 +39,12 @@ export const addCountryToUser = (id, country) =>
     .then(data => data)
 
 
+export const getWeathersOfCountry = (countryId) => 
+    fetch(`${api}/countries/${countryId}/weathers`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+
 
 /**
  * POST CALLS
@@ -84,8 +90,6 @@ export const addCountry = (name) => {
     .then(res => res.json())
     .then(data => data)
 }
-
-
 
 
 
