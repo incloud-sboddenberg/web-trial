@@ -199,3 +199,8 @@
 .countries-list {
     margin-top: 50px;
 }
+
+
+.inline {
+    display: flex;
+}

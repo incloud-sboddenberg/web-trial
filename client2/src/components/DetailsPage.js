@@ -11,12 +11,6 @@ import {
 
 class DetailsPage extends Component {
 
-    // TODO: use `http://openweathermap.org/img/w/${icon}.png`
-    // to display icons
-
-
-
-
     state = {
         humidity: 'nada',
         temp: 'nada',
@@ -36,7 +30,6 @@ class DetailsPage extends Component {
                     if (this.calculateMinutesDiff(data[0].creationDate) > 10) {
                        this.refetchWeatherForCountry() 
                     } else {
-                        console.log(data)
                         this.setWeatherData(data[0].humidity, data[0].temp, data[0].icon, data[0].rain)
                     }
                 } else {
@@ -69,12 +62,6 @@ class DetailsPage extends Component {
                             console.log(data)
                             this.setWeatherData(data.humidity, data.temp, data.icon, data.rain)
                         })
-                    console.group()
-                    console.log(humidity)
-                    console.log(icon)
-                    console.log(temp)
-                    console.log(rain)
-                    console.groupEnd()
                 })
     }
 
@@ -94,7 +81,7 @@ class DetailsPage extends Component {
     render() {
         const { humidity, temp, rain, icon } = this.state
         return (
-            DetailsPageTemplate(humidity, temp, rain, icon)
+            DetailsPageTemplate(this.props.countryName.name , humidity, temp, rain, icon)
         )
     }
 }

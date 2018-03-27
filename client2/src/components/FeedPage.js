@@ -4,6 +4,8 @@ import {List, ListItem} from 'material-ui/List'
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 import { getUsersCountries } from '../actions/countriesActions'
+import FontIcon from 'material-ui/FontIcon'
+import { blue500  } from 'material-ui/styles/colors'
 
 class FeedPage extends Component {
 
@@ -36,9 +38,18 @@ class FeedPage extends Component {
             <List className="countries-list" >
                 {countries.ids.map((countryId) => (
                     <ListItem 
+                        className="inline"
                         key={countryId} 
                         primaryText={countries[countryId].name} 
-                        onClick={this.moveToDetails(countryId)}/>
+                    >
+                        <FontIcon
+                            className="material-icons inline"
+                            hoverColor={blue500} 
+                            onClick={this.moveToDetails(countryId)}
+                        >
+                            cloud
+                        </FontIcon>
+                    </ListItem>
                 ))}
             </List>
             </div>

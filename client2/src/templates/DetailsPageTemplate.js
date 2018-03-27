@@ -1,8 +1,9 @@
 import React from 'react'
 import HeaderActionBar from '../components/HeaderActionBar'
+import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card'
 
 
-const DetailsPageTemplate = (humidity, temp, rain, icon) => (
+const DetailsPageTemplate = (country, humidity, temp, rain, icon) => (
     <div>
         <HeaderActionBar />
 
@@ -10,12 +11,21 @@ const DetailsPageTemplate = (humidity, temp, rain, icon) => (
         <br/>
         <br/>
         <br/>
-        <h4>humidity:</h4><p>{humidity}</p>
-        <h4>temp:</h4><p>{temp}</p>
-        <h4>rain:</h4><p>{rain}</p>
+     <Card>
+        <CardTitle title={country}/>
+        <CardHeader
+          avatar={icon}
+        />
+        <CardText>
 
-        <img src={icon} />
+            <h4>humidity:</h4><p>{humidity}</p>
+            <h4>temp:</h4><p>{temp}</p>
+            <h4>rain:</h4><p>Probably {(rain)? 'Yes': 'No'}</p>
+        </CardText>
+      </Card>
     </div>
+
+
 )
 
 
