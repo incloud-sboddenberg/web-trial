@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -57,16 +57,22 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    public function __construct()
+    {
+        $this->isActive = true;
+        $this->countries = new ArrayCollection();
+    }
+
+
     /**
      * @ORM\ManyToMany(targetEntity="Country", inversedBy="users")
      * @ApiSubresource
      */
     public $countries;
 
-
-    public function __construct()
+    public function addCountry($country) 
     {
-        $this->isActive = true;
+        $this->countries->add($country);
     }
 
     public function getId()

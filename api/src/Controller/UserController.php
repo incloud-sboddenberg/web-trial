@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Country;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -84,6 +85,40 @@ class UserController extends Controller
             "email" => $user->getEmail(),
         ]);
     }
+
+
+    /**
+     * @Route(
+     *     name="add_country_to_user",
+     *     path="/add-country/{country}/to-user/{id}"
+     * )
+     */
+    public function addCountryToUser(Request $request, $country, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(User::class)->find($id);
+
+        $countryObj = $entityManager->getRepository(Country::class)->loadCountryByName($country);
+
+        if (!$countryObj)
+        {
+            return new JsonResponse([
+                "error" => "No Country with the gine Name " . $country
+            ]);
+        }
+    
+        $user->addCountry($countryObj);
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+        
+        return new JsonResponse([
+            "country" => $countryObj->getName(),
+            "id" => $id,
+            "name" => $user->getUsername()
+        ]);
+    }
+
 
     protected function encodePassword(User $data, UserPasswordEncoderInterface $encoder): User
     {

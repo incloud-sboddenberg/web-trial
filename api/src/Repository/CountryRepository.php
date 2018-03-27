@@ -19,6 +19,16 @@ class CountryRepository extends ServiceEntityRepository
         parent::__construct($registry, Country::class);
     }
 
+
+    public function loadCountryByName($countryName)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('LOWER(u.name) = LOWER(:name)')
+            ->setParameter('name', $countryName)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Country[] Returns an array of Country objects
 //     */
