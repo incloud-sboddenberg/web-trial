@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 
 
-import { parse } from 'qs'
-
-
-
 class FeedPage extends Component {
 
     state = {

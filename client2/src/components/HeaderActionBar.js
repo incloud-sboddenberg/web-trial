@@ -17,24 +17,16 @@ class HeaderActionBar extends Component {
         logout: PropTypes.func.isRequired,
     }
 
-    state = {
-    }
-
-
-
     handleLogoutOnClik = () => {
         this.props.logout()
         this.props.history.push("/login")
     }
-   
-
 
     render() {
-        const { username } = this.props
-        const { isPostDialogOpen} = this.state
+        if (this.props.username === undefined) return null
         return (
             HeaderActionBarTemplate(
-                username, this.handleLogoutOnClik)
+                this.props.username, this.handleLogoutOnClik)
         )
     }
 }

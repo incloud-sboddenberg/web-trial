@@ -38,11 +38,11 @@ const CredentialsBoxTemplate = (handleFormSubmit, isLogin, toggleLogin) => (
 
         <CardText>
             {isLogin &&
-                <a href="#" onClick={toggleLogin}>No Account?</a>
+                <a onClick={toggleLogin}>No Account?</a>
             }
 
             {!isLogin &&
-                <a href="#" onClick={toggleLogin}>Already have an account?</a>
+                <a onClick={toggleLogin}>Already have an account?</a>
             }
         </CardText>
       </Card>
