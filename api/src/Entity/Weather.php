@@ -7,7 +7,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\WeatherRepository")
- * @ApiResource
+ * @ApiResource(
+ *  attributes={"order"={"creationDate": "DESC"}}
+ * )
  */
 class Weather
 {
