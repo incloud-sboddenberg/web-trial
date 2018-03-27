@@ -94,6 +94,21 @@ export const addCountryToUser = (id, country) => {
 }
 
 
+export const addWeatherToCountry = (countryId, temp, humidity, rain, icon) => {
+    return fetch(`${api}/weathers`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            country: `/countries/${countryId}`})
+    })
+    .then(res => res.json())
+    .then(data => data)
+}
+
+
 
 /**
  * PUT CALLS

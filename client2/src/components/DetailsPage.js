@@ -3,7 +3,10 @@ import { Component } from 'react'
 import DetailsPageTemplate from '../templates/DetailsPageTemplate'
 import { connect } from 'react-redux'
 
-import { fetchWeatherForCountry } from '../utils/api'
+import { 
+    fetchWeatherForCountry as _fetchWeatherForCountry,
+    addWeatherToCountry as _addWeatherToCountry
+} from '../utils/api'
 
 class DetailsPage extends Component {
 
@@ -12,10 +15,21 @@ class DetailsPage extends Component {
             this.props.history.push("/")
         }
 
-        // TODO: Make a query to the server to fetch the name of the country.
         if (this.props.countryName.name !== undefined) {
-            fetchWeatherForCountry(this.props.countryName.name)
-                .then(data => console.log(data))
+            _fetchWeatherForCountry(this.props.countryName.name)
+                .then(data => {
+                    console.log(data)
+                    const { humidity, temp } = data.main
+                    const icon = data.weather[0].icon
+                    // FIXME: make sure that the rain field exist this way in the API
+                    const rain = (data["rain"] !== undefined)? true: false
+                    console.group()
+                    console.log(humidity)
+                    console.log(icon)
+                    console.log(temp)
+                    console.log(rain)
+                    console.groupEnd()
+                })
         }
     }
 

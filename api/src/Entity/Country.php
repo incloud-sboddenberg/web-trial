@@ -32,6 +32,13 @@ class Country
      */
     public $users;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Weather", mappedBy="country")
+     */
+    public $weather;
+
+
     public function getId()
     {
         return $this->id;

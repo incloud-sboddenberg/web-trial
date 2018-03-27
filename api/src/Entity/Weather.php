@@ -43,10 +43,17 @@ class Weather
      */
     private $creationDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Country", inversedBy="weather")
+     */
+    public $country;
+
     public function __construct()
     {
         $this->creationDate = new \DateTimeImmutable();
     }
+
+    
 
     public function getId()
     {
