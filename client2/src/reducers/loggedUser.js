@@ -5,17 +5,21 @@ import {
 
 
 const initLoggedUser = {
-    name: null
+    id: null,
 }
 
 export const loggedUser = (state = initLoggedUser, action) => {
     switch (action.type) {
-        case ADD_USER:
-            return { name: action.name }
-
+        case ADD_USER: {
+            const { username, email, id } = action
+            return {
+                username,
+                email,
+                id
+            }
+        }
         case REMOVE_USER:
-            return { name: null }
-
+            return { id: null }
         default: 
             return state
     }

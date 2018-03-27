@@ -78,12 +78,10 @@ class UserController extends Controller
             ]);
         }
 
-        $token = base64_encode(random_bytes(random_int(10, 50)));
         return new JsonResponse([
             "username" => $user->getUsername(),
             "id" => $user->getId(),
             "email" => $user->getEmail(),
-            "token" => $token 
         ]);
     }
 

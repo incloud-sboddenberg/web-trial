@@ -6,10 +6,10 @@ import { connect } from 'react-redux'
 class RootURL extends Component {
 
     componentDidMount() {
-        if (this.props.username === null) {
+        if (this.props.userId === null) {
             this.props.history.push("/login")
         } else {
-            this.props.history.push("/feed")
+            this.props.history.push("/home")
         }
     }
 
@@ -18,7 +18,7 @@ class RootURL extends Component {
 
 function mapStateToProps ({ loggedUser}) {
     return {
-        username: loggedUser.name
+        userId: loggedUser.id
     }
 }
 

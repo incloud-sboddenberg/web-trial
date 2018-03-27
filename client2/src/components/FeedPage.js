@@ -11,36 +11,17 @@ import { parse } from 'qs'
 class FeedPage extends Component {
 
     state = {
-        sort: "best",
-        page: 1
     }
     
-    /*
+  
     componentDidMount() {
-        if (this.props.username === null) {
+        if (this.props.userId === null) {
             this.props.history.push("/")
         } else {
-            const queryString = this.props.history.location.search
-            if (queryString) {
-                const queryObj = parse(queryString, { ignoreQueryPrefix: true })
-                if (queryObj.page) {
-                    const pageNbr = Number(queryObj.page)
-                    if (!isNaN(pageNbr))
-                        this.setState({ page: pageNbr })
-                }
-            }
 
-            let sort = this.props.match.params.sort
-            if (sort === undefined) sort = "best"
-            if (sort !== "best") {
-                this.props.setPostSorting(sort)
-                this.setState({ sort })
-            }
-            this.props.fetchPosts()
-            this.props.setCategoryInStore()
         }
     }
-*/
+
 
     
     // @direction: clicking next/prev
@@ -56,16 +37,16 @@ class FeedPage extends Component {
         if (this.props.username === null) return null
         return (
             <div>
-                <HeaderActionBar page={"FeedPage"} />
+                <HeaderActionBar />
             </div>
         )
     }
 }
 
-function mapStateToProps ({ loggedUser, posts }) {
+function mapStateToProps ({ loggedUser }) {
     return {
-        username: loggedUser.name,
-        postsIds: posts.ids.filter(id => !posts[id].deleted)
+        userId: loggedUser.id,
+        username: loggedUser.username,
     }
 }
 

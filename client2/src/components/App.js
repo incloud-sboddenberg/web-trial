@@ -18,7 +18,7 @@ class App extends Component {
             <Switch>
                 <Route exact path="/" component={RootURL} />
                 <Route exact path="/login" component={CredentialsBox} />
-                <Route exact path="/feed/:sort(best|worst|oldest|newest)?" component={FeedPage} />
+                <Route exact path="/home" component={FeedPage} />
                 <Route component={Page404} />
             </Switch>
         </MuiThemeProvider>

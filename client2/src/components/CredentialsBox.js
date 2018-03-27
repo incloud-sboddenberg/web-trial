@@ -6,9 +6,12 @@ import CredentialsBoxTemplate from '../templates/CredentialsBoxTemplate'
 
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { actionCreator } from '../actions'
+import { addUser } from '../actions/loggedUserActions'
 
-import { signUp as _signUp } from '../utils/api'
+import { 
+    signUp as _signUp,
+    login as _login
+} from '../utils/api'
 
 class CredentialsBox extends Component {
 
@@ -21,7 +24,16 @@ class CredentialsBox extends Component {
         isLogin: true
     }
     
+
+    componentDidMount() {
+        if (this.props.userId !== null) {
+            this.props.history.push("/home")
+        }
+    }
+
+
     toggleLogin = () => this.setState((currentState) => ({isLogin: !currentState.isLogin}))
+
 
 
 
@@ -30,14 +42,20 @@ class CredentialsBox extends Component {
         const values = serializeForm(e.target, { hash: true })
         
         if (this.state.isLogin) {
-            // TODO: login routine
-            console.log("login")
-            console.log(values)
+            _login(values.username, values.password).then(data => {
+                if (data.error) {
+                    // TODO: add a snackbar with information
+                } else {
+                    this.props.addUserToStore(data.id, data.username, data.email)
+                    this.props.history.push("/home")
+                }
+            })
         } else {
             // TODO: signup routine
             console.log("signup")
             _signUp(values.username, values.email, values.password).then(data => {
-                console.log(data)
+                // TODO: Add a confirmation message
+                this.toggleLogin()
             })
         }
 
@@ -51,14 +69,15 @@ class CredentialsBox extends Component {
     }
 }
 
-function mapStateToProps ({ }) {
+function mapStateToProps ({ loggedUser }) {
     return {
+        userId: loggedUser.id
     }
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        // propsName: () => dispatch(actionCreator())
+        addUserToStore: (id, username, email) => dispatch(addUser(id, username, email))
     }
 }
 

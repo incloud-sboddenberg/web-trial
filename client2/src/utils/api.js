@@ -61,6 +61,22 @@ export const signUp = (username, email, password) => {
     .then(data => data)
 }
 
+
+export const login = (username, password) => {
+
+    return fetch(`${api}/login`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(res => res.json())
+    .then(data => data)
+}
+
+
 export const addAPost = (title, body, author, category) =>
     fetch(`${api}/posts`, {
         method: 'POST',

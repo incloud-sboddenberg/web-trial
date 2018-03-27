@@ -2,10 +2,12 @@ export const ADD_USER = 'ADD_USER'
 export const REMOVE_USER = 'REMOVE_USER'
 
 
-export const addUser = (name) => {
+export const addUser = (id, username, email) => {
     return {
         type: ADD_USER,
-        name
+        username,
+        id,
+        email
     }
 }
 

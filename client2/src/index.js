@@ -19,19 +19,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 // used for Redux Dev Tool extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-
-/**
- * // import { applyMiddleware } from 'redux'
- *
- * createStore(reducer, composeEnhancers(applyMiddleware(mid1, mid2, mid3)))
- * createStore(reducer, applyMiddleware(mid1, mid2, mid3))
- *
- */
-// const store = createStore(reducer,
-//     composeEnhancers()    
-// )
-
-
 const persistConfig = {
     key: 'root',
     storage,
@@ -57,8 +44,6 @@ ReactDOM.render(
         </PersistGate>
     </Provider>,
     document.getElementById('root'));
-
-
 
 
 

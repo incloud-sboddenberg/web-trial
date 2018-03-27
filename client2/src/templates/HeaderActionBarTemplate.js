@@ -15,25 +15,20 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 
 const HeaderActionBarTemplate = (
-    username, page, handleLogout, 
-    isPostDialogOpen, openPostDialog, closePostDialog,
-    isDrawerOpen, openDrawer, closeDrawer,
-    categories, clickCategory,
-    handlePostCreation) => (
+    username, handleLogout) => (
     <div>
         <Toolbar className="sticky-toolbar">
             <ToolbarGroup firstChild={true}>
             <FontIcon
                 className="material-icons"
                 hoverColor={blue500} 
-                onClick={openDrawer}
+                onClick={() => {console.log("open drawer")}}
             >
                 menu
             </FontIcon>
-                <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4><p className="user-section">to {page}</p>
+                <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4>
             </ToolbarGroup>
             <ToolbarGroup>
-                <RaisedButton label="Create Post" primary={true} onClick={openPostDialog} />
                 <ToolbarSeparator />
                 <IconMenu
                 iconButtonElement={
@@ -47,26 +42,6 @@ const HeaderActionBarTemplate = (
             </ToolbarGroup>
         </Toolbar>
         
-        <Dialog
-            className="long-dialog"
-            title="Create new Post"
-            open={isPostDialogOpen} 
-            onRequestClose={closePostDialog} > 
-        </Dialog>
-
-        <Drawer 
-            open={isDrawerOpen} >
-            <AppBar 
-                title="Categories" 
-                iconElementLeft={<IconButton><NavigationClose onClick={closeDrawer} /></IconButton>} />
-            { 
-                categories.map(categoryObj => (
-                    <MenuItem disabled={categoryObj.isDisabled} key={categoryObj.category} onClick={clickCategory(categoryObj.category)}>
-                        {categoryObj.category}
-                    </MenuItem>
-                )) 
-            }
-        </Drawer>
     </div>
 )
 
