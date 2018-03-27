@@ -45,6 +45,7 @@ class CredentialsBox extends Component {
             _login(values.username, values.password).then(data => {
                 if (data.error) {
                     // TODO: add a snackbar with information
+                    console.log(data)
                 } else {
                     console.log(data)
                     this.props.addUserToStore(data.id, data.username, data.email)

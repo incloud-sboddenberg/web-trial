@@ -1,37 +1,32 @@
 import { Component } from 'react'
 
 import DetailsPageTemplate from '../templates/DetailsPageTemplate'
-import { connect } from 'react-redux'
 
-import { fetchWeatherForCountry } from '../utils/api'
+
+// import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+// import { actionCreator } from '../actions'
 
 class DetailsPage extends Component {
+
 
     componentDidMount() {
         if (this.props.userId === null) {
             this.props.history.push("/")
         }
-
-        // TODO: Make a query to the server to fetch the name of the country.
-        if (this.props.countryName.name !== undefined) {
-            fetchWeatherForCountry(this.props.countryName.name)
-                .then(data => console.log(data))
-        }
     }
 
 
     render() {
-
         return (
             DetailsPageTemplate()
         )
     }
 }
 
-function mapStateToProps ({ loggedUser, countries }, ownProps) {
+function mapStateToProps ({ loggedUser }) {
     return {
-        userId: loggedUser.id,
-        countryName: countries[ownProps.match.params.country]
+        userId: loggedUser.id
     }
 }
 
