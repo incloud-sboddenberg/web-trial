@@ -1,2 +1,5 @@
 # vim vp files
 *.swp
+
+# dependenecies
+**node_modules/

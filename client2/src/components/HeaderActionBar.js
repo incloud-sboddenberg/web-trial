@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import { removeUser } from '../actions/loggedUserActions'
 
 import { addCategories } from '../actions/categoriesActions'
-import { createPost as actionCreatePost } from '../actions/postsActions'
 
 class HeaderActionBar extends Component {
 
@@ -91,7 +90,7 @@ function mapStateToProps({ loggedUser, categories }) {
     }
 }
 
-
+/*
 function mapDispatchToProps (dispatch) {
     return {
         logout: () => dispatch(removeUser()),
@@ -99,6 +98,6 @@ function mapDispatchToProps (dispatch) {
         persistPost: (title, body, author, category) => dispatch(actionCreatePost(title, body, author, category))
     }
 }
+*/
 
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar))
+export default withRouter(connect(mapStateToProps, null)(HeaderActionBar))

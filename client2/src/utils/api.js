@@ -1,11 +1,11 @@
+// TODO: remove this:
 import uuidv1 from 'uuid/v1'
 
-const api = "http://localhost:3001"
+const api = "http://localhost:8080"
 
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': 'THIS-IS-A-TOKEN'
 }
 
 /**
@@ -47,25 +47,19 @@ export const getCommentsOfPost = (postId) =>
  * POST CALLS
  */
 
-const voteToPost = (id, option) => {
-    if (option !== "upVote" && option !== "downVote") 
-        return new Promise(resolve => resolve({ 'error': 'There was an error.' }))
+export const signUp = (username, email, password) => {
 
-    return fetch(`${api}/posts/${id}`, {
+    return fetch(`${api}/users`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ option })
+        body: JSON.stringify({ username, email, password })
     })
     .then(res => res.json())
     .then(data => data)
 }
-
-export const upVotePost = (id) => voteToPost(id, "upVote")
-
-export const downVotePost = (id) => voteToPost(id, "downVote")
 
 export const addAPost = (title, body, author, category) =>
     fetch(`${api}/posts`, {

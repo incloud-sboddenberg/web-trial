@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
-import PostCard from './PostCard'
-import SortBox from './SortBox'
-import Pagination from './Pagination'
 
-import { fetchAllPosts, setSort, setCategory } from '../actions/postsActions'
 
 import { parse } from 'qs'
 
@@ -19,6 +15,7 @@ class FeedPage extends Component {
         page: 1
     }
     
+    /*
     componentDidMount() {
         if (this.props.username === null) {
             this.props.history.push("/")
@@ -43,15 +40,8 @@ class FeedPage extends Component {
             this.props.setCategoryInStore()
         }
     }
+*/
 
-
-    getPostsForPage = (page) => {
-        const currentPage = page - 1
-        const currentIndex = currentPage * 3
-        const subPosts = this.props.postsIds.slice(currentIndex, currentIndex + 3)
-
-        return subPosts.map(id => (<PostCard key={id} postId={id} />))
-    }
     
     // @direction: clicking next/prev
     // next: 1
@@ -67,14 +57,6 @@ class FeedPage extends Component {
         return (
             <div>
                 <HeaderActionBar page={"FeedPage"} />
-                <SortBox sort={this.state.sort} baseUrl={"/feed"} />
-                { this.getPostsForPage(this.state.page) }
-                <Pagination 
-                    page={this.state.page} 
-                    finalPage={Math.ceil(this.props.postsIds.length / 3)}
-                    handleNext={this.handlePaginationButtons(1).bind(this)}
-                    handlePrev={this.handlePaginationButtons(-1).bind(this)}
-                />
             </div>
         )
     }
@@ -87,6 +69,7 @@ function mapStateToProps ({ loggedUser, posts }) {
     }
 }
 
+/*
 function mapDispatchToProps (dispatch) {
     return {
        setCategoryInStore: () => dispatch(setCategory("all")),
@@ -94,6 +77,6 @@ function mapDispatchToProps (dispatch) {
        setPostSorting: (sort) => dispatch(setSort(sort)),
     }
 }
+*/
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(FeedPage)
+export default connect(mapStateToProps, null)(FeedPage)
