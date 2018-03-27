@@ -20,7 +20,7 @@ export const fetchCountry = (name) =>
     .then(data => data)
 
 export const fetchUserCountries = (id) => 
-    fetch(`${api}/${id}/countries`, { headers })
+    fetch(`${api}/users/${id}/countries`, { headers })
     .then(res => res.json())
     .then(data => data)
 

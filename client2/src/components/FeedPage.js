@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
-
+import { getUsersCountries } from '../actions/countriesActions'
 
 class FeedPage extends Component {
 
@@ -11,7 +11,7 @@ class FeedPage extends Component {
         if (this.props.userId === null) {
             this.props.history.push("/")
         } else {
-
+            this.props.fetchUserCountries(this.props.userId)
         }
     }
 
@@ -32,14 +32,10 @@ function mapStateToProps ({ loggedUser }) {
     }
 }
 
-/*
 function mapDispatchToProps (dispatch) {
     return {
-       setCategoryInStore: () => dispatch(setCategory("all")),
-       fetchPosts: () => dispatch(fetchAllPosts()),
-       setPostSorting: (sort) => dispatch(setSort(sort)),
+        fetchUserCountries: (id) => dispatch(getUsersCountries(id))
     }
 }
-*/
 
-export default connect(mapStateToProps, null)(FeedPage)
+export default connect(mapStateToProps, mapDispatchToProps)(FeedPage)
